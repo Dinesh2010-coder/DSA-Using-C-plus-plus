@@ -13,7 +13,7 @@ class Node{
     }
 
     ~Node(){
-        while (this->next!=NULL)
+        if(this->next!=NULL)
         {
             delete next;
             this->next = NULL;
@@ -38,10 +38,10 @@ void print(Node* &head){
     cout<<endl;
 }
 
-Node* uniqueSortedList(Node * head){
+void uniqueSortedList(Node * &head){
     if (!head)
     {
-        return NULL; 
+        return ; 
     }
 
     Node* curr = head;
@@ -63,7 +63,6 @@ Node* uniqueSortedList(Node * head){
         
     }
 
-    return head;
 }
 
 int main(){
@@ -75,8 +74,8 @@ int main(){
 
     cout<< "LL before : "<<endl;
     print(head);
-    Node * head2 = uniqueSortedList(head);
+    uniqueSortedList(head);
     cout<< "LL after : "<<endl;
-    print(head2);
+    print(head);
     return 0;
 }
