@@ -1,4 +1,5 @@
 #include<iostream>
+#include<unordered_map>
 
 using namespace std; 
 
@@ -44,23 +45,27 @@ void uniqueSortedList(Node * &head){
         return ; 
     }
 
+    unordered_map<int, bool> visited;
     Node* curr = head;
-    Node * temp = NULL;
+    visited[curr->data] = true;
+    Node * prev = head;
+    curr = curr->next;
     while (curr!=NULL)
     {
-        if ((curr->next!=NULL) && (curr->data == curr->next->data))
+        if (visited[curr->data])
         {
-            temp = curr->next;
-
-            curr->next = curr->next->next;
-            delete temp;
+            prev->next = curr->next;
+            delete curr;
         }
+
         else
         {
-            curr = curr->next;
+            visited[curr->data] = true;
+            prev = curr;
         }
-        
-        
+
+        curr = curr->next;
+   
     }
 
 }
@@ -69,8 +74,10 @@ int main(){
     Node* head = NULL;
     insertAtHead(head,3);
     insertAtHead(head,2);
+    insertAtHead(head,4);
+    insertAtHead(head,3);
     insertAtHead(head,2);
-    insertAtHead(head,1);
+    insertAtHead(head,3);
 
     cout<< "LL before : "<<endl;
     print(head);
