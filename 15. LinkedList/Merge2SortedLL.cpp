@@ -38,6 +38,29 @@ void print(Node * &head){
     cout<<endl;
 }
 
+Node* mergeTwoLists(Node* first, Node* second) {
+        Node* curr1 = first;
+        Node* curr2 = second;
+        
+        if(!curr1){
+            return curr2; 
+        }
+        
+        if(!curr2){
+            return curr1;
+        }
+        
+        if(curr1->data < curr2->data){
+            curr1->next = mergeTwoLists(curr1->next, curr2);
+            return curr1;
+        }
+        else{
+            curr2->next = mergeTwoLists(curr1,curr2->next);
+            return curr2;
+        }
+    }
+
+/*
 Node* solve(Node* first, Node* second){
     if(first->next == NULL){
         first->next = second;
@@ -91,6 +114,7 @@ Node* sortTwoLists(Node* first, Node* second)
     
     return head;
 }
+*/
 
 int main(){
     Node* head1 = NULL;
@@ -108,7 +132,8 @@ int main(){
     print(head2);
 
     cout<<"Merged LL : "<<endl;
-    Node* head = sortTwoLists(head1, head2);
+    // Node* head = sortTwoLists(head1, head2);
+    Node* head = mergeTwoLists(head1,head2);
     print(head);
     return 0;
 }
