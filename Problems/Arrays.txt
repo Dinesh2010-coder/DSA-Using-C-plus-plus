@@ -1,0 +1,98 @@
+Q1. Unique Element in array with repeating element is also present twice only 
+----> Using Map
+
+int solve(vector<int> &arr){
+    map<int,int> freq;
+    for(int i:arr){
+        freq[i]++;
+    }
+
+    for(int i:arr){
+        if(freq[i] == 1){
+            return arr[i];
+        }
+    }
+}
+
+
+OR
+
+        AND        OR       XOR            
+0-0      0          0       0
+0-1      0          1       1
+1-0      0          1       1
+1-1      1          1       0
+
+
+Code:-
+
+ int arr[]={1,2,3,2,1}; 
+ int res=0; 
+ for(int i=0;i<5;i++) {
+    if(res=res^arr[i]){
+        cout<<res; 
+    } 
+        
+----------------------------------------------------
+
+Q2. 2 Unique Element are there and repeating element is present twice 
+--->Using Map
+
+vector<int>  solve(arr){
+    map<int,int> visited;  
+    for(int i:arr){
+        visited[i]++;
+    }
+
+    vector<int> ans;
+    /*
+    for(int i:arr){
+        if(visited[i] == 1){
+            ans.push_back(arr[i]);
+        }
+    }
+    */
+
+    for(auto i:visited){
+        if(i.second == 1){
+            ans.push_back(i.first);
+        }
+    }
+
+    return ans;
+}
+
+OR
+
+1,2,3,4,2,1
+
+XOR = 1^2^3^4^2^1  but 1 will cancel out 1 and 2 will cancel out 2
+XOR = 3^4
+
+Code:-
+xor = 0;
+for(int i:arr){
+    xor ^= i
+}
+xor = xor&(-xor);
+(rsb)
+
+ele1=0,ele2=0;
+for(int i:arr){
+    if(i&xor){
+        ele1^=i;
+    }else{
+        ele2^=i;
+    }
+}
+
+return {ele1, ele2};
+
+
+
+H/W:- 
+
+Q3. Every number coming 3 times except 1 element
+Q4. Input N, Check if it is perfect power of 2
+Q5. Input N, Check if it is perfect power of 4
+Q6. Array given of size n. It should contain counting from 1 to N. But by mistake 1 ele is missing and instead of that duplicate element is there. So return missing ele and duplicate ele.
